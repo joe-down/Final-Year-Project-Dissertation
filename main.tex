@@ -1,0 +1,78 @@
+\documentclass[a4paper,11pt]{report}
+\usepackage{setspace}
+\pagestyle{plain}
+\usepackage{amssymb,graphicx,color}
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage[a4paper, margin = 2.5cm, bottom = 2.5cm]{geometry}
+
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage[noabbrev,capitalise]{cleveref}
+\usepackage{pdfpages}
+\usepackage{mfirstuc}
+\usepackage{listings}
+\usepackage[style=trad-unsrt]{biblatex}
+\addbibresource{assets/bibliography.bib}
+\usepackage{adjustbox}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{
+{\vspace{-14em} \includegraphics[width=\textwidth]{assets/images/ucl}}\\
+{{\Huge WebMGA 3.0}}\\
+{\large Refinement of an Interactive Viewer for Coarse-Grained Liquid Crystal Models}\\
+}
+
+\date{Submission Date: 26\textsuperscript{th} April 2024}
+\author{Joe Down\thanks{
+{\bf Disclaimer:}
+This report is submitted as part requirement for the MEng in Computer Science at UCL. It is
+substantially the result of my own work except where explicitly indicated in the text. The report may be freely copied and distributed provided the source is explicitly acknowledged.}
+\\ \\
+MEng Computer Science\\ \\
+Supervisor: Guido Germano}
+
+\begin{document}
+ 
+\onehalfspacing
+\maketitle
+
+\begin{abstract}
+\input{assets/abstract}
+\end{abstract}
+
+\tableofcontents
+
+\setcounter{page}{1}
+
+\chapter{Background}
+
+\chapter{Aims}
+
+\chapter{Developments}
+\input{assets/director}
+\input{assets/axes}
+\input{assets/shapes}
+\input{assets/filetypes}
+\input{assets/optimisations}
+
+\chapter{Analysis and Testing}
+
+\chapter{Conclusions}
+\section{Achievements}
+\input{assets/achievements}
+\section{Evaluation}
+\input{assets/evaluation}
+\section{Future Work}
+
+\appendix
+
+\printbibliography
+
+\chapter{Appendices}
+%TODO uncomment appendices
+%\input{assets/appendices}
+
+\end{document}

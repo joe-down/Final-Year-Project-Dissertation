@@ -1,0 +1,68 @@
+\section{File types}
+\subsection{WebMGA 2.0 Implementation}
+WebMGA 2.0 supports only its own JSON-based file format as defined in CITEORIGINALDISSERTATION. This could prove an obstacle to users since, in practice, different formats are output when running molecular dynamics simulations (CITE!!).
+
+\subsection{WebMGA 2.0 Bugs}
+TODO
+
+\subsection{WebMGA 3.0 Implementation}
+WebMGA 3.0 implements two new file formats for defining molecular configurations as defined below.
+\subsubsection{LAMMPS Format (.cnf)}
+LAMMPS is a molecular dynamics simulator typically used on highly parallel computers\cite{thompson2022lammps}. It uses a specifically designed file format to represent molecular configurations to allow the highest possible performance while preserving some amount of human readability.
+
+\cref{tab:lammps_format} shows the structure of a file of this format. Rows represent lines in the file. Each value is represented by a signed float of format $-1.000000 $, where digits before the decimal are omitted if not present. Values are separated by spaces, padded to align decimal points.
+
+For WebMGA 3.0, a parser script was written in JavaScript which builds a WebMGA JSON configuration from the ``.cnf'' file provided. Specifically, a unit box is constructed from $(lx, ly, lz)$, and molecule positions and orientations are obtained from corresponding pairs of $(rx,ry,rz)$ and $(ex,ey,ez)$ for some molecule id. All other parameters are dropped since they aren't used by WebMGA. Molecules are ordered in an array according to their id.
+\begin{table}
+  \begin{center}
+  \begin{adjustbox}{width=\textwidth}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+      \hline
+      Molecule count & & & & & & & & & & & &\\
+      \hline
+      Unit box X length ($lx$) & & & & & & & & & & & &\\
+      \hline
+      Unit box Y length ($ly$) & & & & & & & & & & & &\\
+      \hline
+      Unit box Z length ($lz$) & & & & & & & & & & & &\\
+      \hline
+      Not used & Not used & & & & & & & & & & &\\
+      \hline
+      Position ($rx$) & Position ($ry$) & Position ($rz$) & Velocity ($vx$) & Velocity ($vy$) & Velocity ($vz$) & Orientation ($ex$) & Orientation ($ey$) & Orientation ($ez$) & Orientational velocity ($ux$) & Orientational velocity ($uy$) & Orientational velocity ($uz$) & Molecule ID\\
+      \hline
+      \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+       \hline
+    \end{tabular}
+  \end{adjustbox}
+  \end{center}
+  \caption{LAMMPS format molecule configuration}
+  \label{tab:lammps_format}
+\end{table}
+
+\subsubsection{Cinacchi Format (.qmga)}
+TODO WRITE THIS
+TODO CHECK LETTERS USED FOR ROTATION ETC
+
+See \cref{tab:cinacchi_format} for the structure of a file of this format. Rows represent lines in the file. Each value is represented by a signed float of format $-1.00000000$, where digits before the decimal are omitted if not present. Values are separated by spaces, padded to align decimal points.
+
+For WebMGA 3.0, a parser script was written in JavaScript which builds a WebMGA JSON configuration from the ``.qmga'' file provided. Specifically, a unit box is constructed from $(lx, ly, lz)$, and molecule positions and orientations are obtained from corresponding pairs of $(rx,ry,rz)$ and $(ex,ey,ez)$. The shape parameter is dropped since molecule shape is not defined by the file. Molecules are ordered in an array as they are encountered.
+\begin{table}
+  \begin{center}
+  \begin{adjustbox}{width=\textwidth}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+      \hline
+       Unit box X half length ($lx/2$) & Unit box Y half length ($ly/2$) & Unit box Z half length ($lz/2$) & & & &\\
+       \hline
+       Shape parameter & Position X ($rx$) & Position Y ($ry$) & Position Z ($rz$) & Orientation X ($ex$) & Orientation Y ($ey$) & Orientation Z ($ez$)\\
+       \hline
+       \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+       \hline
+    \end{tabular}
+  \end{adjustbox}
+  \end{center}
+  \caption{Cinacchi format molecule configuration}
+  \label{tab:cinacchi_format}
+\end{table}
+
+\subsection{WebMGA 3.0 Bugs}
+WebMGA ignores the shape parameter from the ``.qmga'' format configuration. Since some shapes in WebMGA require multiple parameters, and the shape to use is not defined within the file, I could not see a sensible way to automate applying this. The user must manually enter this value after selecting a molecule shape in the ``Models'' menu. This is not ideal since a user should expect their configuration to appear correctly as soon as they load the file.
