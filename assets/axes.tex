@@ -32,18 +32,18 @@ In WebMGA 2.0, the 3D axes are displayed as shown in \cref{fig:original_axes_no_
 
 Axes take the form of three lines of fixed lengths in the $x$, $y$, and $z$ directions. Each line's midpoint is the world coordinate $(0, 0, 0)$, where all axes meet. Axes extend in both positive and negative directions. They are not shown by default and, when first enabled, are uncoloured. When coloured, the $x$ axis is red, the $y$ axis is green, and the $z$ axis is blue.
 
-Visibility is toggled using the "Show" button and colour is toggled with the "Multi-Colour" button. A question mark icon is next to the "Multi-Colour" which shows a tooltip when hovered specifying the axis colour scheme.
+Visibility is toggled using the ``Show'' button and colour is toggled with the ``Multi-Colour'' button. A question mark icon is next to the ``Multi-Colour'' which shows a tooltip when hovered specifying the axis colour scheme.
 
 \subsection{WebMGA 2.0 Bugs}
 \begin{figure}
   \begin{center}
     \includegraphics[width=\linewidth]{assets/images/axes/2_bug}
-    \caption{\centering Bug where axes are not coloured despite the "Multi-Colour" toggle being enabled when axes are first enabled}
+    \caption{\centering Bug where axes are not coloured despite the ``Multi-Colour'' toggle being enabled when axes are first enabled.}
     \label{fig:original_bug}
   \end{center}
 \end{figure}
 
-When the axes are toggled to visible for the first time, if the "Multi-Colour" toggle has not been interacted with first, the axes will be uncoloured, despite the "Multi-Colour" toggle being enabled by default. This is shown in \cref{fig:original_bug}. To enable colour for the first time, the "Multi-Colour" toggle must be disabled and then re-enabled.
+When the axes are toggled to visible for the first time, if the ``Multi-Colour'' toggle has not been interacted with first, the axes will be uncoloured, despite the ``Multi-Colour'' toggle being enabled by default. This is shown in \cref{fig:original_bug}. To enable colour for the first time, the "Multi-Colour" toggle must be disabled and then re-enabled.
 
 When the environment is set to light mode (white background) with coloured axes disabled, the axes become difficult to view since they retain a white colour as default, blending into the background as shown in \cref{fig:original_axes_no_colour_bad}.
 
@@ -87,8 +87,7 @@ Using the world space centre point and the axes vectors and scales, axis lines a
 \begin{equation}
   l_1=c+szv\label{axes_vector_2}
 \end{equation}
-
-Where $l_0$ and $l_1$ are the axis line start and end, $c$ is the axes centre, $v$ is the axis vector, $s$ is the axis scale factor, and $z$ is the zoom factor of the camera. These can be recalculated and applied on every camera change. A Three.js Line object is constructed for each axis using the line start, end, and a colour.
+where $l_0$ and $l_1$ are the axis line start and end, $c$ is the axes centre, $v$ is the axis vector, $s$ is the axis scale factor, and $z$ is the zoom factor of the camera. These can be recalculated and applied on every camera change. A Three.js Line object is constructed for each axis using the line start, end, and a colour.
 
 \subsubsection{Director}
 Plotting the director is made simple using the above setup. A new axis is simply defined using \cref{axes_vector_1,axes_vector_2}, with $v$ set to the already computed director vector (TODO show where this was done).
