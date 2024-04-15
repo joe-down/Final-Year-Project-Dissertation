@@ -30,7 +30,7 @@
 
 In WebMGA 2.0, the 3D axes are displayed as shown in \cref{fig:original_axes_no_colour,fig:original_axes_colour}, and controlled through the user interface as shown in \cref{fig:original_axes_controls} (visibility and colour toggles).
 
-Axes take the form of three lines of fixed lengths in the $x$, $y$, and $z$ directions. Each line's midpoint is the world coordinate $(0, 0, 0)$, where all axes meet. Axes extend in both positive and negative directions. They are not shown by default and, when first enabled, are uncoloured. When coloured, the $x$ axis is red, the $y$ axis is green, and the $z$ axis is blue.
+Axes take the form of three lines of fixed lengths in the $x$, $y$, and $z$ directions. Each line's midpoint is the lab fram coordinate $(0, 0, 0)$, where all axes meet. Axes extend in both positive and negative directions. They are not shown by default and, when first enabled, are uncoloured. When coloured, the $x$ axis is red, the $y$ axis is green, and the $z$ axis is blue.
 
 Visibility is toggled using the ``Show'' button and colour is toggled with the ``Multi-Colour'' button. A question mark icon is next to the ``Multi-Colour'' which shows a tooltip when hovered specifying the axis colour scheme.
 
@@ -75,11 +75,11 @@ When the environment is set to light mode (white background) with coloured axes 
 \subsubsection{Axes Positions}
 The existing implementation was found to be needlessly convoluted so was largely stripped out. For example, coloured and uncoloured axes were implemented entirely separately, resulting in a large amount of duplicated code and convoluted logic flow. The bug identified in WebMGA 2.0 regarding uncoloured axes showing with "Multi-Colour" enabled, for example, was found to occur due to incorrect colour object initialisation, meaning what should be "Multi-Colour" axes showed as uncoloured since the colours are not defined when these lines are loaded the very first time.
 
-In the new axes code, they are simply defined in terms of an axes centre point, three axes vectors, and an axis length scale. The axes vectors are handled in world coordinate space so are trivially defines as $x=(1,0,0)$, $y=(0,1,0)$, and $z=(0,0,1)$.
+In the new axes code, they are simply defined in terms of an axes centre point, three axes vectors, and an axis length scale. The axes vectors are handled in the lab frame so are trivially defines as $x=(1,0,0)$, $y=(0,1,0)$, and $z=(0,0,1)$.
 
-Since the axes centre needs to remain in a fixed position on screen at all times, it needs to be defined relative to the camera. Three.js provides a method on any world object which converts from object relative coordinates to world coordinates, so this is used to trivially place the axes centre into world space as required. Since this relationship changes when an object, in this case the camera, moves, the axes centre must therefore be redefined on any camera movement. This process also does not account for changes to intrinsic camera properties, importantly camera zoom. The axes therefore need to be scaled proportionally to the camera's zoom level on any zoom change.
+Since the axes centre needs to remain in a fixed position on screen at all times, it needs to be defined relative to the camera. Three.js provides a method on any world object which converts from object relative coordinates to the lab frame, so this is used to trivially place the axes centre into the lab fram as required. Since this relationship changes when an object, in this case the camera, moves, the axes centre must therefore be redefined on any camera movement. This process also does not account for changes to intrinsic camera properties, importantly camera zoom. The axes therefore need to be scaled proportionally to the camera's zoom level on any zoom change.
 
-Using the world space centre point and the axes vectors and scales, axis lines are trivially defined as:
+Using the lab frame centre point and the axes vectors and scales, axis lines are trivially defined as,
 
 \begin{equation}
   l_0=c\label{axes_vector_1}
