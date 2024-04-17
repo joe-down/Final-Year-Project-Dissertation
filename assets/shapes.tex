@@ -55,7 +55,7 @@ WebMGA 2.0 implements the following molecule shapes:
 \begin{itemize}
   \item Sphere (\cref{fig:sphere_shape})
   \item Ellipsoid (\cref{fig:ellipsoid_shape})
-  \item Spherocylinder (TODO)
+  \item Spherocylinder (\cref{fig:spherocylinder_shape})
   \item Spheroplatelet (\cref{fig:spheroplatelet_shape})
   \item Cut Sphere (\cref{fig:doublecutsphere_shape}, implemented as a double cut sphere)
   \item Cylinder (\cref{fig:cylinder_shape})
@@ -217,8 +217,37 @@ export class Ellipsoid extends Sphere {
 \end{lstlisting}
 \end{adjustbox}
 
+\subsubsection{Spheroplatelet}
+\shapefigure{spheroplatelet}{spheroplatelet}
+
+\subsubsection{Cut Sphere}
+The cut sphere shape (\cref{fig:cutsphere_shape}) is implemented simply by sampling the sphere as before but over a reduced range of $\phi$ values. Since the sphere will not be completed, an empty circular face is left which can be filled by generating an additional vertex by averaging the coordinates for each vertex on the circle's edge, splitting it into triangles. This can be observed on \cref{fig:new_cutsphere_w}.
+
+The new range of $\phi$s can be defined as $[\arcsin\frac{c}{r}, \pi)$, where $c$ is the radius of the circle resulting from the cut and $r$ is the radius of the sphere. TODO THIS SHOULD HAVE A DIAGRAM AND BE ELABORATED ON IMPLEMENTATION
+\newshapefigure{cutsphere}{cut sphere}
+
+\subsubsection{Double Cut Sphere}
+The double cut sphere shape (\cref{fig:doublecutsphere_shape}) is implemented simply by sampling the sphere as before but over a reduced range of $\phi$ values. Since the sphere will not be completed, two empty circular faces are left which can be filled by generating two additional vertices by averaging the coordinates for each vertex on the corresponding circle's edge, splitting it into triangles. This can be observed on \cref{fig:new_doublecutsphere_w}.
+
+The new range of $\phi$s can be defined as $[\arcsin\frac{c}{r}, \pi - \arcsin\frac{c}{r})$, where $c$ is the radius of the circle resulting from the cut and $r$ is the radius of the sphere. TODO THIS SHOULD HAVE A DIAGRAM AND BE ELABORATED ON IMPLEMENTATION
+\shapefigure{doublecutsphere}{double cut sphere}
+
+\subsubsection{Cap}
+The cap shape (\cref{fig:cap_shape}) is implemented simply by sampling the sphere as before but over a reduced range of $\phi$ values. Since the sphere will not be completed, an empty circular face is left which can be filled by generating an additional vertex by averaging the coordinates for each vertex on the circle's edge, splitting it into triangles. This can be observed on \cref{fig:new_cap_w}.
+
+The new range of $\phi$s can be defined as $[0, \arcsin\frac{c}{r})$, where $c$ is the radius of the circle resulting from the cut and $r$ is the radius of the sphere. TODO THIS SHOULD HAVE A DIAGRAM AND BE ELABORATED ON IMPLEMENTATION
+
+\subsubsection{Lens}
+\newshapefigure{lens}{lens}
+
+\subsubsection{Cinacchi Lens}
+%\newshapefigure{}{}
+
+\subsubsection{Biconvex Lens}
+%\newshapefigure{}{}
+
 \subsubsection{Spherocylinder}
-The spherocylinder shape (TODO REFERENCE) can be represented as an origin centred sphere of radius $r$ scaled in the $z$ directions by (half of) some length value in each $z$ direction (positive/negative). This can be represented by a slightly modified form of the Cartesian sphere equation in \cref{sphere_equation_cartesian},
+The spherocylinder shape (\cref{fig:spherocylinder_shape}) can be represented as an origin centred sphere of radius $r$ scaled in the $z$ directions by (half of) some length value in each $z$ direction (positive/negative). This can be represented by a slightly modified form of the Cartesian sphere equation in \cref{sphere_equation_cartesian},
 
 \begin{equation}
 \mathbf{r}_{c}=\begin{pmatrix}r\sin\phi \cos\theta\\
@@ -271,29 +300,7 @@ export class Spherocylinder extends Sphere {
 }
 \end{lstlisting}
 \end{adjustbox}
-
-\subsubsection{Spheroplatelet}
-\shapefigure{spheroplatelet}{spheroplatelet}
-
-\subsubsection{Cut Sphere}
-The cut sphere shape (\cref{fig:cutsphere_shape}) is implemented simply by sampling the sphere as before but over a reduced range of $\phi$ values. Since the sphere will not be completed, an empty circular face is left which can be filled by generating an additional vertex by averaging the coordinates for each vertex on the circle's edge, splitting it into triangles. This can be observed on \cref{fig:new_cutsphere_w}.
-
-The new range of $\phi$s can be defined as $[\arcsin\frac{c}{r}, \pi)$, where $c$ is the radius of the circle resulting from the cut and $r$ is the radius of the sphere. TODO THIS SHOULD HAVE A DIAGRAM AND BE ELABORATED ON IMPLEMENTATION
-\newshapefigure{cutsphere}{cut sphere}
-
-\subsubsection{Double Cut Sphere}
-The double cut sphere shape (\cref{fig:doublecutsphere_shape}) is implemented simply by sampling the sphere as before but over a reduced range of $\phi$ values. Since the sphere will not be completed, two empty circular faces are left which can be filled by generating two additional vertices by averaging the coordinates for each vertex on the corresponding circle's edge, splitting it into triangles. This can be observed on \cref{fig:new_doublecutsphere_w}.
-
-The new range of $\phi$s can be defined as $[\arcsin\frac{c}{r}, \pi - \arcsin\frac{c}{r})$, where $c$ is the radius of the circle resulting from the cut and $r$ is the radius of the sphere. TODO THIS SHOULD HAVE A DIAGRAM AND BE ELABORATED ON IMPLEMENTATION
-\shapefigure{doublecutsphere}{double cut sphere}
-
-\subsubsection{Cap}
-The cap shape (\cref{fig:cap_shape}) is implemented simply by sampling the sphere as before but over a reduced range of $\phi$ values. Since the sphere will not be completed, an empty circular face is left which can be filled by generating an additional vertex by averaging the coordinates for each vertex on the circle's edge, splitting it into triangles. This can be observed on \cref{fig:new_cap_w}.
-
-The new range of $\phi$s can be defined as $[0, \arcsin\frac{c}{r})$, where $c$ is the radius of the circle resulting from the cut and $r$ is the radius of the sphere. TODO THIS SHOULD HAVE A DIAGRAM AND BE ELABORATED ON IMPLEMENTATION
-
-\subsubsection{Lens}
-\newshapefigure{lens}{lens}
+\shapefigure{spherocylinder}{spherocylinder}
 
 \subsection{WebMGA 3.0 Bugs}
 TODO
