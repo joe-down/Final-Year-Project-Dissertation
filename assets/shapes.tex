@@ -233,6 +233,7 @@ The new range of $\phi$s can be defined as $[\arcsin\frac{c}{r}, \pi - \arcsin\f
 \shapefigure{doublecutsphere}{double cut sphere}
 
 \subsubsection{Cap}
+\newshapefigure{cap}{cap}
 The cap shape (\cref{fig:cap_shape}) is implemented simply by sampling the sphere as before but over a reduced range of $\phi$ values. Since the sphere will not be completed, an empty circular face is left which can be filled by generating an additional vertex by averaging the coordinates for each vertex on the circle's edge, splitting it into triangles. This can be observed on \cref{fig:new_cap_w}.
 
 The new range of $\phi$s can be defined as $[0, \arcsin\frac{c}{r})$, where $c$ is the radius of the circle resulting from the cut and $r$ is the radius of the sphere. TODO THIS SHOULD HAVE A DIAGRAM AND BE ELABORATED ON IMPLEMENTATION
@@ -241,7 +242,27 @@ The new range of $\phi$s can be defined as $[0, \arcsin\frac{c}{r})$, where $c$ 
 \newshapefigure{lens}{lens}
 
 \subsubsection{Cinacchi Lens}
-%\newshapefigure{}{}
+\begin{figure}
+  \begin{center}
+    \begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/cinacchi}
+      \caption{Image by Giorgio Cinacchi.}
+      \label{fig:cinacchi_lens_provided}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/qmga}
+      \caption{Recreation with QMGA.}
+      \label{fig:cinacchi_lens_qmga}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/webmga}
+      \caption{Recreation with WebMGA.}
+      \label{fig:cinacchi_lens_webmga}
+    \end{subfigure}
+  \end{center}
+  \caption{Lens setup required by Giorgio Cinacchi.}
+  \label{fig:cinacchi_lens}
+\end{figure}
 
 \subsubsection{Biconvex Lens}
 \label{biconvex_section}
