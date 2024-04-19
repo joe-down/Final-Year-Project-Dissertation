@@ -90,6 +90,7 @@ Using the lab frame centre point and the axes vectors and scales, axis lines are
 where $l_0$ and $l_1$ are the axis line start and end, $c$ is the axes centre, $v$ is the axis vector, $s$ is the axis scale factor, and $z$ is the zoom factor of the camera. These can be recalculated and applied on every camera change. A Three.js Line object is constructed for each axis using the line start, end, and a colour.
 
 \subsubsection{Director}
+\label{director_axis_plot}
 Plotting the director is made simple using the above setup. A new axis is simply defined using \cref{axes_vector_1,axes_vector_2}, with $v$ set to the already computed director vector (TODO show where this was done).
 
 \subsubsection{Axes Colouring}

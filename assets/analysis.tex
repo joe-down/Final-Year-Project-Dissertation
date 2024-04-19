@@ -1,22 +1,27 @@
+\section{Level of Detail Performance}
+\label{lod_analysis_section}
 \begin{table}
   \begin{center}
   \begin{adjustbox}{width=\textwidth}
-    \begin{tabular}{|c|c|c|c|c|c|}
+    \begin{tabular}{llrrrr}
+    \hline
     \hline
     LOD Enabled & Mesh Quality & Repeats & Distant Framerate (7) & Nearby Framerate (50) & Nearest Framerate (100)\\
     \hline
-    \hline
     True & High & $(0,0,0)$ & 48.6 & 26.4 & 22.2 \\
-    \hline
     False & High & $(0,0,0)$ & 2.4 & 1.2 & 0.6 \\
-    \hline
     True & Default & $(0,0,0)$ & 36.6 & 27.6 & 21.0 \\
-    \hline
     False & Default & $(0,0,0)$ & 14.4 & 4.8 & 1.2 \\
-    \hline
     True & Low & $(0,0,0)$ & 32.4 & 28.2 & 22.8\\
-    \hline
     False & Low & $(0,0,0)$ & 16.2 & 8.4 & 3.0 \\
+    \hline
+    True & High & $(1,1,1)$ & 9.64 & 8.43 & 10.54 \\
+    False & High & $(1,1,1)$ & 0.86 & 1.87 & 3.97 \\
+    True & Default & $(1,1,1)$ & & & \\
+    False & Default & $(1,1,1)$ & & & \\
+    True & Low & $(1,1,1)$ & & &\\
+    False & Low & $(1,1,1)$ & & & \\
+    \hline
     \hline
     \end{tabular}
   \end{adjustbox}
@@ -24,3 +29,5 @@
   \caption{TODO TITLE. MENTION THERMAL THROTTLING ISSUES}
   \label{tab:lod_test}
 \end{table}
+
+\section{Configuration Visualisations}

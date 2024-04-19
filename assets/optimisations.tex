@@ -7,6 +7,71 @@ TODO
 
 \subsection{WebMGA 3.0 Implementation}
 \subsubsection{Discrete Levels of Detail}
+\begin{figure}
+  \begin{center}
+    \begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/lod/1}
+      \caption{Low detail.}
+      \label{fig:lod_1}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/lod/2}
+      \caption{Medium detail.}
+      \label{fig:lod_2}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/lod/3}
+      \caption{Full detail.}
+      \label{fig:lod_3}
+    \end{subfigure}
+    
+    \begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/lod/1_w}
+      \caption{Low detail.}
+      \label{fig:lod_1_w}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/lod/2_w}
+      \caption{Medium detail.}
+      \label{fig:lod_2_w}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/lod/3_w}
+      \caption{Full detail.}
+      \label{fig:lod_3_w}
+    \end{subfigure}
+  \end{center}
+  \caption{Model complexity is decreased at subjectively chosen camera distance thresholds with minimal visible loss in quality.}
+  \label{fig:lod_distances}
+\end{figure}
 
+\begin{figure}
+  \begin{center}
+    \begin{subfigure}{\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/lod/a}
+      \caption{At a similar distance, all objects are identical.}
+      \label{fig:lod_a}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/lod/a_w}
+      \caption{At a similar distance, all meshes are identical.}
+      \label{fig:lod_a_w}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/lod/b}
+      \caption{Further spheres have a minor decrease in visible quality.}
+      \label{fig:lod_b}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/lod/b_w}
+      \caption{Further spheres have a minor decrease in triangle density.}
+      \label{fig:lod_b_w}
+    \end{subfigure}
+  \end{center}
+  \caption{Demonstration of decreased mesh quality for distant object. ``Level of Detail'' setting has been reduced below default for a more visible geometry reduction.}
+  \label{fig:lod_spin}
+\end{figure}
+
+Performance analysis for this optimisation is discussed in \cref{lod_analysis_section}.
 \subsection{WebMGA 3.0 Bugs}
 TODO

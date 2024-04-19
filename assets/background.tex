@@ -6,3 +6,30 @@ Since QMGA has not been updated in so long, it continues to depend on the severe
 WebMGA is a project begun by \textcite{Battistini_2021} in 2021 which aims to address this accessibility issue whilst replicating the functionality of QMGA. It was continued in 2023 by CITE YUE. It's written in JavaScript using the React framework with the three.js library for 3D rendering. This addresses the accessibility issues of QMGA since it can be easily accessed using just a web browser. While WebMGA contains full functionality for rendering most molecule configurations from QMGA, it still has performance and functionality limitations, as well as some bugs. WebMGA 3.0 aims to address a majority of these issues.
 
 \section{Liquid Crystal Modelling}
+Most details regarding molecular simulation is not required to understand the implementations made for this project. Some key terms which will be used throughout are defined in the following subsections, based on \textcite{allen2017computer} except where cited otherwise.
+\subsection{Director}
+Under a coarse-grained potential model, liquid crystal configuration have a long-range orientational order, and sometimes also a long range positional order. An order represents a preferred alignment for molecules within that system\cite{dong1997orientational}. The orientational order can be described by a magnitude $S$, and a direction $\mathbf{n}$. $\mathbf{n}$ is typically referred to as the director. Both $S$ and $\mathbf{n}$ can be derived from the order tensor $\mathcal{Q}$, which is defined as follows for a system containing $N$ molecules each with unit vector direction $\mathbf{e}$,
+
+\begin{equation}
+\mathcal{Q}=
+\frac{3}{2N}
+\sum_{i=1}^{N}
+(\mathbf{e}_i
+\otimes
+\mathbf{e}_i)
+-\frac{1}{2}\mathbb{I}
+\end{equation}
+
+\begin{equation}
+\mathbf{e}_i=\begin{pmatrix}
+  \mathbf{e}_{ix}\\
+  \mathbf{e}_{iy}\\
+  \mathbf{e}_{iz}
+\end{pmatrix}.
+\label{order_tensor_e}
+\end{equation}
+$n$ can be defined as the direction which maximises $S$ and is obtainable by diagonalising $\mathcal{Q}$ and taking the eigenvector corresponding to the largest eigenvalue (which is itself $S$).
+
+Since the director provides TODO, it is useful to visualise both the director itself and the alignment of each molecule in the system. This is discussed further in \cref{colour_director,director_axis_plot}
+
+\subsection{Periodic Boundary Conditions}
