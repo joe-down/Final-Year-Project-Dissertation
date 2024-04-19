@@ -1,6 +1,6 @@
 \section{Periodic Repetition (TODO RENAME THIS?}
 \subsection{Improvement Goals}
-Typically, molecular simulations use periodic boundary conditions to allow modelling only a portion of an entire system\cite{gabriel2008molecular}. An infinite lattice is produced by repeating a smaller simulation box\cite{wu2014applying}. When a molecule leaves the simulation box through one of its faces, it enters again with the same movement properties through the opposite face\cite{wu2014applying}. It may be useful to visualise a larger subset of this infinite lattice by repeating the simulation box a number of times. Additionally, the capability of repeating a smaller system is useful for producing a realistic, much larger configuration for testing the performance of WebMGA with increased molecule counts due to the lack of availability of real test configurations of such sizes.
+A description for periodic boundary conditions is given in \cref{pbc_explain} regarding how a small simulation box simulates a subset of an infinite lattice. It may be useful to visualise a larger subset of this infinite lattice by repeating the simulation box a number of times. Additionally, the capability of repeating a smaller system is useful for producing a realistic, much larger configuration for testing the performance of WebMGA with increased molecule counts due to the lack of availability of real test configurations of such sizes.
 
 \subsection{WebMGA 3.0 Implementation}
 A few modifications needed to be made to implement this feature.

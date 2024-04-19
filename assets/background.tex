@@ -8,7 +8,7 @@ WebMGA is a project begun by \textcite{Battistini_2021} in 2021 which aims to ad
 \section{Liquid Crystal Modelling}
 Most details regarding molecular simulation is not required to understand the implementations made for this project. Some key terms which will be used throughout are defined in the following subsections, based on \textcite{allen2017computer} except where cited otherwise.
 \subsection{Director}
-Under a coarse-grained potential model, liquid crystal configuration have a long-range orientational order, and sometimes also a long range positional order. An order represents a preferred alignment for molecules within that system\cite{dong1997orientational}. The orientational order can be described by a magnitude $S$, and a direction $\mathbf{n}$. $\mathbf{n}$ is typically referred to as the director. Both $S$ and $\mathbf{n}$ can be derived from the order tensor $\mathcal{Q}$, which is defined as follows for a system containing $N$ molecules each with unit vector direction $\mathbf{e}$,
+Under a coarse-grained potential model, liquid crystal configuration have a long-range orientational order, and sometimes also a long range positional order. An order represents a preferred alignment for molecules within that system\cite{dong1997orientational}. The orientational order can be described by a magnitude $S$, and a direction $\mathbf{n}$. $\mathbf{n}$ is typically referred to as the director. Both $S$ and $\mathbf{n}$ can be derived from the order tensor $\mathcal{Q}$, which is defined as follows for a system containing $N$ molecules each with unit vector principal axis direction $\mathbf{e}$,
 
 \begin{equation}
 \mathcal{Q}=
@@ -30,6 +30,8 @@ Under a coarse-grained potential model, liquid crystal configuration have a long
 \end{equation}
 $n$ can be defined as the direction which maximises $S$ and is obtainable by diagonalising $\mathcal{Q}$ and taking the eigenvector corresponding to the largest eigenvalue (which is itself $S$).
 
-Since the director provides TODO, it is useful to visualise both the director itself and the alignment of each molecule in the system. This is discussed further in \cref{colour_director,director_axis_plot}
+Since the director provides TODO, it is useful to visualise both the director itself how each molecule in the system aligns. This is discussed further in \cref{colour_director,director_axis_plot}
 
 \subsection{Periodic Boundary Conditions}
+\label{pbc_explain}
+Typically, molecular simulations use periodic boundary conditions to allow modelling only a portion of an entire system\cite{gabriel2008molecular}. An infinite lattice is produced by repeating a smaller simulation box\cite{wu2014applying}. When a molecule leaves the simulation box through one of its faces, it enters again with the same movement properties through the opposite face\cite{wu2014applying}.
