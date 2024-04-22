@@ -1,9 +1,9 @@
 \section{File types}
 \subsection{WebMGA 2.0 Implementation}
-WebMGA 2.0 supports only its own JSON-based file format as defined by \citeauthor{Battistini_2021}. This could prove an obstacle to users since, in practice, different formats are output when running molecular dynamics simulations (CITE!!).
+WebMGA 2.0 supports only its own JSON-based file format as defined by \citeauthor{Battistini_2021}. This could prove an obstacle to users since, in practice, different formats are output when running molecular dynamics simulations.
 
 \subsection{WebMGA 2.0 Bugs}
-TODO
+N/A
 
 \subsection{WebMGA 3.0 Implementation}
 WebMGA 3.0 implements two new file formats for defining molecular configurations as defined below.
@@ -40,9 +40,6 @@ For WebMGA 3.0, a parser script was written in JavaScript which builds a WebMGA 
 \end{table}
 
 \subsubsection{Cinacchi Format (.qmga)}
-TODO WRITE THIS
-TODO CHECK LETTERS USED FOR ROTATION ETC
-
 See \cref{tab:cinacchi_format} for the structure of a file of this format. Rows represent lines in the file. Each value is represented by a signed float of format $-1.00000000$, where digits before the decimal are omitted if not present. Values are separated by spaces, padded to align decimal points.
 
 For WebMGA 3.0, a parser script was written in JavaScript which builds a WebMGA JSON configuration from the ``.qmga'' file provided. Specifically, a unit box is constructed from $(lx, ly, lz)$, and molecule positions and orientations are obtained from corresponding pairs of $((rx,ry,rz),(ex,ey,ez))$. The shape parameter is dropped since molecule shape is not defined by the file. Molecules are ordered in an array as they are encountered.

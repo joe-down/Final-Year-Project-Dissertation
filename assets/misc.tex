@@ -1,1 +1,11 @@
 \section{Miscellaneous Improvements}
+\begin{itemize}
+  \item Various GUI and model state synchronisation issues fixed
+  \begin{itemize}
+    \item Bounding box now updates correctly on new model loading
+    \item Model update function fixed to run immediately before every frame update rather than at arbitrary intervals (avoid delayed state changes)
+\end{itemize}
+  \item Outdated and vulnerable dependencies updated
+  \item Fixed various type inconsistencies in code which could result in unexpected behaviour and added additional validation checks
+  \item Changed shape geometry complexity increments (Level of Detail slider) to a base 2 logspace to scale with more sensible intervals
+\end{itemize}
