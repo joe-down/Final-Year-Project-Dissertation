@@ -1,3 +1,34 @@
 WebMGA 3.0 is a visualisation tool for molecular simulation outputs which refines on previous versions by \textcite{Battistini_2021,webmga_2}. It provides a more modern, maintainable, and accessible alternative to the older QMGA tool by \textcite{gabriel2008molecular}. The program is available as a web app at \citeurl{webmga_3_app}, with source code at \citeurl{webmga_3_github}. Development utilised JavaScript with the React\cite{react} framework and three.js\cite{three} 3D graphics library.This project aimed to fix existing issues in WebMGA and further enhance the existing feature set.
 
 This report provides a background summary explaining the requirements and terminology for molecular simulation rendering (\cref{context_section}), descriptions for the changes required and made for WebMGA 3.0 (\cref{req_section,imp_section}), and quantitative summaries for performance improvements and qualitative analysis of rendered systems (\cref{analysis_sec}). Finally, achievements are summarised and the project successes evaluated (\cref{conc_eval_sec}).
+
+\begin{figure}
+  \begin{center}
+    \begin{subfigure}{0.4\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/configs/nematic}
+      \caption{Unfolded SC4 Nematic.}
+    \end{subfigure}
+    \begin{subfigure}{0.4\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/configs/iso}
+      \caption{E5 Isotropic.}
+    \end{subfigure}
+    \begin{subfigure}{0.4\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/configs/smectic}
+      \caption{SC4 Smectic.}
+    \end{subfigure}
+    \begin{subfigure}{0.4\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/configs/biaxial}
+      \caption{Biaxial Crystal.}
+    \end{subfigure}
+    \begin{subfigure}{0.4\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/configs/chiral}
+      \caption{Unfolded E3 Chiral Nematic.}
+    \end{subfigure}
+    \begin{subfigure}{0.4\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/configs/hbc}
+      \caption{HBC (In Cylinder).}
+    \end{subfigure}
+  \end{center}
+  \caption{Various configurations generated using WebMGA 3.0.}
+  \label{fig:assorted_configs}
+\end{figure}
