@@ -227,15 +227,55 @@ export class Ellipsoid extends Sphere {
 
 \subsubsection{Cut Sphere}
 \label{cut_sphere_section}
+\begin{figure}
+  \begin{center}
+    \begin{subfigure}{0.3\textwidth}
+      \includesvg[width=\textwidth]{assets/images/shape_diagrams/cut_sphere}
+      \caption{Cut sphere.}
+      \label{fig:cut_sphere_diagram}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \includesvg[width=\textwidth]{assets/images/shape_diagrams/doublecut}
+      \caption{Double cut sphere.}
+      \label{fig:double_cut_diagram}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \includesvg[width=\textwidth]{assets/images/shape_diagrams/cap}
+      \caption{Cap.}
+      \label{fig:cap_diagram}
+    \end{subfigure}
+  \end{center}
+  \caption{Cap and cut sphere shape diagrams. Lens outlines are shown by a red line, black lines demonstrate construction.}
+  \label{fig:cap_cut_descriptions}
+\end{figure}
 The cut sphere shape (\cref{fig:cutsphere_shape}) is implemented simply by sampling the sphere as before but over a reduced range of $\phi$ values. Since the sphere will not be completed, an empty circular face is left which can be filled by generating an additional vertex by averaging the coordinates for each vertex on the circle's edge, splitting it into triangles. This can be observed on \cref{fig:new_cutsphere_w}.
 
-The new range of $\phi$s can be defined as $[\arcsin\frac{c}{r}, \pi)$, where $c$ is the radius of the circle resulting from the cut and $r$ is the radius of the sphere. TODO THIS SHOULD HAVE A DIAGRAM AND BE ELABORATED ON IMPLEMENTATION
+A cut sphere is parameterised in WebMGA using a parent sphere radius and a zCut distance. These are shown in \cref{fig:cut_sphere_diagram}, with characters $r$ and $x$ respectively. The new range of $\phi$s can be seen in the diagram as the range $[\alpha,\pi)$, which can be reinterpreted in terms of $r$ and $x$ as follows,
+\begin{equation}
+\alpha=\arcsin\frac{c}{r}
+\end{equation}
+\begin{equation}
+c=\sqrt{r^2-x^2}
+\end{equation}
+\begin{equation}
+[\alpha,\pi)=[\arcsin\frac{c}{r},\pi)
+\end{equation}
+
 \newshapefigure{cutsphere}{cut sphere}
 
 \subsubsection{Double Cut Sphere}
 The double cut sphere shape (\cref{fig:doublecutsphere_shape}) is implemented simply by sampling the sphere as before but over a reduced range of $\phi$ values. Since the sphere will not be completed, two empty circular faces are left which can be filled by generating two additional vertices by averaging the coordinates for each vertex on the corresponding circle's edge, splitting it into triangles. This can be observed on \cref{fig:new_doublecutsphere_w}.
 
-The new range of $\phi$s can be defined as $[\arcsin\frac{c}{r}, \pi - \arcsin\frac{c}{r})$, where $c$ is the radius of the circle resulting from the cut and $r$ is the radius of the sphere. TODO THIS SHOULD HAVE A DIAGRAM AND BE ELABORATED ON IMPLEMENTATION
+A double cut sphere is parameterised in WebMGA using a parent sphere radius and a zCut distance. These are shown in \cref{fig:double_cut_diagram}, with characters $r$ and $x$ respectively. The new range of $\phi$s can be seen in the diagram as the range $[\alpha,\pi-\alpha)$, which can be reinterpreted in terms of $r$ and $x$ as follows,
+\begin{equation}
+\alpha=\arcsin\frac{c}{r}
+\end{equation}
+\begin{equation}
+c=\sqrt{r^2-x^2}
+\end{equation}
+\begin{equation}
+[\alpha,\pi-\alpha)=[\arcsin\frac{c}{r},\pi - \arcsin\frac{c}{r})
+\end{equation}
 \shapefigure{doublecutsphere}{double cut sphere}
 
 \subsubsection{Cap}
@@ -243,7 +283,16 @@ The new range of $\phi$s can be defined as $[\arcsin\frac{c}{r}, \pi - \arcsin\f
 \newshapefigure{cap}{cap}
 The cap shape (\cref{fig:cap_shape}) is implemented simply by sampling the sphere as before but over a reduced range of $\phi$ values. Since the sphere will not be completed, an empty circular face is left which can be filled by generating an additional vertex by averaging the coordinates for each vertex on the circle's edge, splitting it into triangles. This can be observed on \cref{fig:new_cap_w}.
 
-The new range of $\phi$s can be defined as $[0, \arcsin\frac{c}{r})$, where $c$ is the radius of the circle resulting from the cut and $r$ is the radius of the sphere. TODO THIS SHOULD HAVE A DIAGRAM AND BE ELABORATED ON IMPLEMENTATION
+A cap is parameterised in WebMGA using a parent sphere radius and a zCut distance. These are shown in \cref{fig:cap_diagram}, with characters $r$ and $x$ respectively. The new range of $\phi$s can be seen in the diagram as the range $[0,\alpha)$, which can be reinterpreted in terms of $r$ and $x$ as follows,
+\begin{equation}
+\alpha=\arcsin\frac{c}{r}
+\end{equation}
+\begin{equation}
+c=\sqrt{r^2-x^2}
+\end{equation}
+\begin{equation}
+[0, \alpha)=[0, \arcsin\frac{c}{r})
+\end{equation}
 
 \subsubsection{Lens}
 \begin{figure}
@@ -264,18 +313,18 @@ The new range of $\phi$s can be defined as $[0, \arcsin\frac{c}{r})$, where $c$ 
       \label{fig:biconvex_lens_diagram}
     \end{subfigure}
   \end{center}
-  \caption{Lens type diagrams.}
+  \caption{Lens shape diagrams. Lens outlines are shown by a red line, black lines demonstrate construction.}
   \label{fig:lens_descriptions}
 \end{figure}
 
-The lens shape is created by assembling either two caps (\cref{cap_section}) or a cap and a a cut sphere (\cref{cut_sphere_section}). TODO FINISH
+The lens shape is created by assembling either two caps (\cref{cap_section}) or a cap and a a cut sphere (\cref{cut_sphere_section}) to recreate the format shown in \cref{fig:lens_diagram}. For the upper part of the lens, a cap is generated with angle parameter $\alpha$. For the lower part of the lens, if the required $\theta$ is greater than $\frac{\pi}{2}$ then a TODO FINISH
 \paragraph{Base Lens}
 \label{base_lens_para}
 \paragraph{Thick Lens}
 \newshapefigure{lens}{lens}
 
 \subsubsection{Cinacchi Lens}
-During development, some sample configurations requiring the lens molecule shape were provided by Giorgio Cinacchi. For these configurations, Cinacchi uses a specific lens parameterisation consisting of only a single $r$ value,
+During development, some sample configurations requiring the lens molecule shape were provided by Giorgio Cinacchi. For these configurations, Cinacchi uses a specific lens configuration as shown in \cref{fig:cinacchi_lens_diagram} which is parameterised using only a single $r$ value,
 \begin{equation}
 \cos\theta=1-\frac{1}{2\pi r^2}
 \label{cinacchi_equations_1}
@@ -284,7 +333,7 @@ During development, some sample configurations requiring the lens molecule shape
 \theta=\arccos\left(1-\frac{1}{2\pi r^2}\right).
 \label{cinacchi_equations_2}
 \end{equation}
-This produces an infinitely thin lens with some aperture angle dependent on the radius, as shown in \cref{fig:cinacchi_lens_diagram}. The Cinnachi lens is implemented simply as a parameterisation of the base lens in \cref{base_lens_para} where the two radii are both $r$ and angle derived from \cref{cinacchi_equations_2}.
+This produces an infinitely thin lens with some aperture angle dependent on the radius. The Cinnachi lens is implemented simply as a parameterisation of the base lens in \cref{base_lens_para} where the two radii are both $r$, and the angle is derived from \cref{cinacchi_equations_2}.
 
 A screenshot produced using QMGA was provided by Cinacchi to assist in visually verifying the shape produced. This is shown in \cref{fig:cinacchi_lens_provided}. A recreation was produced in QMGA as shown in \cref{fig:cinacchi_lens_qmga}, then WebMGA as shown in \cref{fig:cinacchi_lens_webmga}. This appears to verify a correct implementation.
 
