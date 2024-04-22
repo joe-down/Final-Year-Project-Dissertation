@@ -332,7 +332,7 @@ c=\sqrt{r^2-x^2}
 
 The lens shape (\cref{fig:lens_shape}) is created by assembling either two caps (\cref{cap_section}) or a cap and a a cut sphere (\cref{cut_sphere_section}) to recreate the format shown in \cref{fig:lens_diagram}. For the concave part of the lens, a cap is generated with angle parameter $\alpha$. For the concave part of the lens, if the required $\theta$ is greater than $\frac{\pi}{2}$ then a cut sphere is used, else a cap. The flat face of both parts is removed and the concave part is transformed such that the circular edge matches the circular edge of the convex part. Both parts are then transformed such that the lab frame origin is located at the pole of the convex half of the lens.
 
-TODO DISCUSS VERTEX FLIPPING
+For the concave part of the lens, it will appear invisible due to back face culling since the triangle normals face outwards by default which will be the inside of the lens. To mitigate this, ordering for rows of vertices must be reversed in the vertex array. TODO FINISH THIS BIT
 
 In code, the lens and cut sphere are parameterised in terms of a radius and a cut circle circumference. These correspond to $(r_1,c)$, $(r_2,c)$ in \cref{fig:lens_diagram} for the concave and convex parts respectively. There are a few possible parameterisations which can define a lens, from which required values are derived. The two implemented by WebMGA are discussed below.
 \paragraph{Base Lens:}
@@ -343,7 +343,7 @@ c=r_1\sin\alpha
 \label{lens_c_equation}
 \end{equation}
 This parameterisation is implemented in the code as the ``BaseLens'' class since it was the easiest to implement the previously described vertex generation with, however is not shown to the user since it did not seem as intuitive to set up as the thick lens parameterisation.
-\paragraph{Thick Lens}
+\paragraph{Thick Lens:}
 The thick lens is WebMGA's default parameterisation for the lens as shown for the user. It is parameterised as ``Radius'' ($r_1$ in \cref{fig:lens_diagram}), ``Thickness'' ($t$ in \cref{fig:lens_diagram}), and angle (($\alpha$ in \cref{fig:lens_diagram}). It is implemented as a subclass of ``BaseLens'' which generates its parameters from those provided. $r_1$ and $\alpha$ are given. $r_2$ is derived as follows (using $c$ derived from \cref{lens_c_equation}),
 \begin{equation}
 b= r_2+t-r_1
@@ -418,7 +418,24 @@ A screenshot produced using QMGA was provided by Cinacchi to assist in visually 
 
 \subsubsection{Biconvex Lens}
 \label{biconvex_section}
-%\newshapefigure{}{}
+The biconvex lens shape (\cref{fig:biconvex_shape}, parameters ``Radius'', ``Angle'', ``Separation'') is implemented as a specific inititalisation of the ``BaseLens''(\cref{base_lens_para}) where $r2=-r1$.
+
+Since the configurations provided by Cinacchi (\cref{fig:cinacchi_lens_provided}) aimed to emulate a biconvex lens using two separate lenses, but exhibited a small gap between the two parts, it was decided that a separation parameter would also be provided. This is implemented by moving the top part up and bottom part down by half the separation value. A row of vertices is inserted between to split the flat edge into triangles as seen in \cref{fig:new_biconvex_w}. A complication encountered is that by default the bottom half of the lens is not aligned correctly which results in a twisting effect visible in \cref{fig:bad_biconvex}, so all vertex rows must be shifted such that the correct configuration applies for triangle generation.
+\newshapefigure{biconvex}{biconvex lens}
+\begin{figure}
+\begin{center}
+    \begin{subfigure}{0.4\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/shapes/bugnew/bicon}
+      \caption{Shape.}
+    \end{subfigure}
+        \begin{subfigure}{0.4\textwidth}
+      \includegraphics[width=\textwidth]{assets/images/shapes/bugnew/bicon_w}
+      \caption{Wireframe.}
+    \end{subfigure}
+    \end{center}
+  \caption{Incorrectly configured biconvex lens where halves are incorrectly aligned.}
+  \label{fig:bad_biconvex}
+\end{figure}
 
 \subsubsection{Spherocylinder}
 \label{spherocylinder_section}
