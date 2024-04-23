@@ -400,11 +400,11 @@ r_2=\frac{2r_1^2(1-\cos\alpha)+2tr_1(\cos(\alpha)-1)+t^2}{2(r_1(1-\cos\alpha)-t)
 \subsubsection{Cinacchi Lens}
 During development, some sample configurations requiring the lens molecule shape were provided by Giorgio Cinacchi. This is named the ``Cinacchi Lens'' in WebMGA (parameters ``Radius''). For these configurations, Cinacchi uses a specific lens configuration as shown in \cref{fig:cinacchi_lens_diagram} which is parameterised using only a single $r$ value,
 \begin{equation}
-\cos\theta=1-\frac{1}{2\pi r^2}
+\cos\alpha=1-\frac{1}{2\pi r^2}
 \label{cinacchi_equations_1}
 \end{equation}
 \begin{equation}
-\theta=\arccos\left(1-\frac{1}{2\pi r^2}\right).
+\alpha=\arccos\left(1-\frac{1}{2\pi r^2}\right).
 \label{cinacchi_equations_2}
 \end{equation}
 This produces an infinitely thin lens with some aperture angle dependent on the radius. The Cinnachi lens is implemented simply as a parameterisation of the base lens in \cref{base_lens_para} where the two radii are both $r$, and the angle is derived from \cref{cinacchi_equations_2}.
