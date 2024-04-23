@@ -9,16 +9,16 @@ WebMGA is a project begun by \textcite{Battistini_2021} in 2021 which aims to ad
 Most details regarding molecular simulation is not required to understand the implementations made for this project. Some key concepts which will be used throughout are defined in the following subsections, based on \textcite{allen2017computer} except where cited otherwise.
 \subsection{Director}
 \label{director_explain}
-Under a coarse-grained potential model, liquid crystal configuration have a long-range orientational order, and sometimes also a long range positional order. An order represents a preferred alignment for molecules within that system\cite{dong1997orientational}. The orientational order can be described by a magnitude $S$, and a direction $\mathbf{n}$. $\mathbf{n}$ is typically referred to as the director. Both $S$ and $\mathbf{n}$ can be derived from the order tensor $\mathcal{Q}$, which is defined as follows for a system containing $N$ molecules each with unit vector principal axis direction $\mathbf{e}$,
+Under a coarse-grained potential model, liquid crystal configuration have a long-range orientational order, and sometimes also a long range positional order. An order represents a preferred alignment for molecules within that system\cite{dong1997orientational}. The orientational order can be described by a magnitude $S$, and a direction $\mathbf{n}$. $\mathbf{n}$ is typically referred to as the director. Both $S$ and $\mathbf{n}$ can be derived from the order tensor $\mathbf{Q}$, which is defined as follows for a system containing $N$ molecules each with unit vector principal axis direction $\mathbf{e}$,
 
 \begin{equation}
-\mathcal{Q}=
+\mathbf{Q}=
 \frac{3}{2N}
 \sum_{i=1}^{N}
 (\mathbf{e}_i
 \otimes
 \mathbf{e}_i)
--\frac{1}{2}\mathbb{I}
+-\frac{1}{2}\mathbf{I}
 \end{equation}
 
 \begin{equation}
@@ -29,7 +29,8 @@ Under a coarse-grained potential model, liquid crystal configuration have a long
 \end{pmatrix}.
 \label{order_tensor_e}
 \end{equation}
-$n$ can be defined as the direction which maximises $S$ and is obtainable by diagonalising $\mathcal{Q}$ and taking the eigenvector corresponding to the largest eigenvalue (which is itself $S$).
+The director $\mathbf{n}$ is defined as the eigenvector that corresponds to the maximum eigenvalue of the order tensor $\mathbf{Q}$.
+%the direction which maximises $S$ and is obtainable by diagonalising $\mathcal{Q}$ and taking the eigenvector corresponding to the largest eigenvalue (which is itself $S$).
 
 Since the director is a useful property for describing and understanding a system, it is convenient to be able to visualise both the director itself and how each molecule in the system aligns with it. Implementation of a director axis and director based axis colouring is discussed further in \cref{colour_director,director_axis_plot}, while molecule colouring based on director alignment was already implemented by \textcite{Battistini_2021}.
 

@@ -7,8 +7,8 @@ N/A
 
 \subsection{WebMGA 3.0 Implementation}
 WebMGA 3.0 implements two new file formats for defining molecular configurations as defined below.
-\subsubsection{CNF (LAMMPS) Format (.cnf)}
-The .cnf format is widely used for representation of molecular configurations. LAMMPS is one example of a molecular dynamics simulator which uses this, typically used on highly parallel computers\cite{thompson2022lammps}. The .cnf format is specifically designed to allow the highest possible performance while preserving some amount of human readability.
+\subsubsection{CNF Format (.cnf)}
+The CNF format is widely used for representation of molecular configurations. LAMMPS is one example of a molecular dynamics simulator which uses this, typically used on highly parallel computers\cite{thompson2022lammps}. The CNF format is specifically designed to allow the highest possible performance while preserving some amount of human readability.
 
 \cref{tab:lammps_format} shows the structure of a file of this format. Rows represent lines in the file. Each value is represented by a signed float of format $-1.000000 $, where digits before the decimal are omitted if not present. Values are separated by spaces, padded to align decimal points.
 
