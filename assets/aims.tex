@@ -1,38 +1,116 @@
-\section{Non Functional Requirements}
-Non functional requirements are summarised in \cref{tab:func}.TODO
+\section{Non-functional Requirements}
+WebMGA's non-functional requirements are largely the same as those identified by \textcite{Battistini_2021}. Performance of WebMGA 3.0 should at least match, or exceed, that of WebMGA 2.0 and QMGA to ensure responsive user camera controls. The user interface should be clearly laid out, with features organised under appropriate submenus. Since WebMGA 2.0 is already clearly laid out, this should be left largely unchanged besides adding a few additional menu options under appropriate sub-menus to enable new features.
+
+\section{Functional Requirements}
+For each WebMGA 3.0 development, \cref{imp_section} summarises the existing WebMGA 2.0 implementation and its limitations before discussing improvement goals and how they were implemented for WebMGA 3.0. This report is structured in this way since the developments were more a series of mini-projects to improve an existing program than a single large scope. \cref{tab:func} briefly summarises these improvement goals.
 \begin{table}
   \begin{center}
-    \begin{tabular}{cc}
-       a & b \\
-       c & d \\
+  \begin{adjustbox}{width=\textwidth}
+    \begin{tabular}{lcc}
+    \hline\hline
+       \textbf{Requirement} & \textbf{Priority} & \textbf{Achieved (Yes/No/Partially)} \\
+       \hline
+       \textbf{Axes} & &\\
+       \hline
+       Position axes so they are not obscured by molecules & High & Y\\
+       Axes should extend only in positive direction & Medium & Y\\
+       Additional axis showing director & High & Y\\
+       Axes should be labelled ($x,y,z,\mathbf{n}$)& Medium & N\\
+       Axes should be coloured from director ($x,y,z,\mathbf{n}$)& Medium & Y\\
+        \hline
+       \textbf{Shapes} & &\\
+       \hline
+       Implement optimised sphere mesh generation & High & Y\\
+       Implement sphere mesh generation optimisation (\cref{sphere_optim}) & Medium & Y\\
+       Reimplement optimised ellipsoid & Medium & Y\\
+       Reimplement optimised spheroplatelet & Medium & Y\\
+       Reimplement optimised spherocylinder & Medium & P\\
+       Fix bugged spherocylinder mesh (\cref{fig:bad_spherocylinder_old}) & High & Y\\
+       Reimplement optimised double cut sphere & Medium & Y\\
+       Fix double cut sphere 0 height bug (\cref{fig:no_height_bug_old}) & Medium & Y\\
+       Implement cut sphere & High & Y\\
+       Implement spherical cap & High & Y\\
+       Implement lens & High & Y\\
+       Implement biconvex lens & High & Y\\
+       Implement lens & High & Y\\
+       Recreate configuration in \cref{fig:cinacchi_lens} & High & Y\\
+       Implement Cinacchi lens parameterisation & High & Y\\
+       \hline
+        \textbf{File Types} & &\\
+       \hline
+       Enable support for CNF file format & High & Y\\
+       Enable support for Cinacchi file format & Medium & Y\\
+        \hline
+       \textbf{Periodic Repetition} & &\\
+       \hline
+       Enable configurable periodic repetition of a configuration & Medium & Y\\
+        \hline
+       \textbf{Optimisation} & &\\
+       \hline
+       Implement distance based variable level of detail optimisation & Medium & Y\\
+        Analyse performance gains and/or losses from optimisation & Medium & P\\
+      \hline
+       \textbf{Miscellaneous Bug Fixes} & &\\
+       \hline
+       Address all GUI and model state synchronisation issues & High & P\\
+       Fix bounding box updating incorrectly on new model load & High & Y\\
+       Fix the scene update function to be called immediately before any frame render (\cref{axes_positions_sec}) & Medium & Y\\
+       Update outdated and vulnerable dependencies & High & Y\\
+       Improve and comment unclear existing code & Medium & P\\
+       Use more sensible level of detail increments & Medium & P\\
+       \hline\hline
     \end{tabular}
+  \end{adjustbox}
   \end{center}
-  \caption{Non Functional Requirements.}
+  \caption{Functional Requirements.}
   \label{tab:func}
 \end{table}
 
-\section{Functional Requirements}
-For each WebMGA 3.0 development, \cref{imp_section} summarises the existing WebMGA 2.0 implementation and its limitations before discussing improvement goals and how they were implemented \cref{tab:non_func} summarises these improvement goals.TODO
+\section{Use Cases}
+Use cases are largely the same as those identified by \textcite{Battistini_2021}. Two sets of users are identified. One group is educators, students, and researchers learning about liquid crystals. This group's use case are summarised in \cref{tab:use_cases}. The other group is researchers who need to produce images for publications, whose use cases are summarised in \cref{tab:use_cases2} (in addition to those in \cref{tab:use_cases}).
 \begin{table}
   \begin{center}
-    \begin{tabular}{cc}
-       a & b \\
-       c & d \\
+  \begin{adjustbox}{width=\textwidth}
+    \begin{tabular}{ll}
+    \hline\hline
+       \textbf{Feature} & \textbf{Use Case} \\
+       \hline
+       Rendered view with movable camera & Inspect configuration from various viewing angles. \\
+       Molecule library & Select and visualise real liquid crystal configurations. \\
+       About menu & View useful information about WebMGA such as a manual and other background information. \\
+       LOD slider & Adjust LOD for desirable performance. \\
+       Export & Save a render to file for later reference. \\
+       \hline\hline
     \end{tabular}
+    \end{adjustbox}
   \end{center}
-  \caption{Functional Requirements.}
-  \label{tab:non_func}
+  \caption{Use cases for educators, students, and researchers learning about liquid crystals. Mostly based on those identified by \textcite{Battistini_2021}.}
+  \label{tab:use_cases}
 \end{table}
 
-\section{Use Cases}
-Use cases requirements are summarised in \cref{tab:use_cases}.TODO
 \begin{table}
   \begin{center}
-    \begin{tabular}{cc}
-       a & b \\
-       c & d \\
+    \begin{adjustbox}{width=\textwidth}
+    \begin{tabular}{ll}
+    \hline\hline
+       \textbf{Feature} & \textbf{Use Case} \\
+       \hline
+       Upload configuration & Use a customised configuration requiring visualisation \\
+       Save configuration & Export a configured molecule setup to json format. \\
+       Change molecule shape & Adjust molecule geometry to fit requirements for visualisation. \\
+       Display wireframe & May assist for configuring molecule shapes. \\
+       Colour from director & Visualise molecules' prinicipal axis alignment. \\
+       Slicing & Visualise configuration cross sections. \\
+       Light position & Move, enable/disable, or recolour a light source to assist visualisation.\\
+       Unit box & Visualise configuration simulation boundaries. \\
+       Periodic folding & Visualise folding of molecules into unit box. \\
+       Configuration repeats & Visualise a larger portion of a full system. \\
+       Axes & Help identify camera orientation and molecule locations. \\
+       Axes colouring & Help identify colouring based on director. \\
+       \hline\hline
     \end{tabular}
+  \end{adjustbox}
   \end{center}
-  \caption{Functional Requirements.}
-  \label{tab:use_cases}
+  \caption{Use cases for researchers who need to produce images for publications. Mostly based on those identified by \textcite{Battistini_2021}.}
+  \label{tab:use_cases2}
 \end{table}

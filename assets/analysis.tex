@@ -1,9 +1,14 @@
+Specific analyses for success with implementing features such as the axes and shape geometries are discussed as part of the corresponding sections in \cref{imp_section}. This section focuses only on general performance characteristics and overall subjective rendered image quality.
 \section{Level of Detail Performance}
 \label{lod_analysis_section}
 
-The level of detail performance optimisation (\cref{optim_lod}) was analysed to determine conditions under which it provided a notable improvement. An experiment was constructed using the ``Unfolded SC4 Nematic'' configuration at 3 zoom levels, with 3 mesh qualities, and with 2 periodic repetition settings. Average framerates with the model set to auto rotate over a 1 minute period were compared, with results summarised in \cref{tab:lod_test}. As expected, for high base LODs with large configurations, a significant performance improvement was noted with performance uplifts of up to 5x with minimal visual degradation. For lower molecule counts or base geometry complexities, these performance uplifts diminish significantly. In fact, for small configurations at medium details, slightly higher performance can be observed with the optimisation disabled.
+The level of detail performance optimisation (\cref{optim_lod}) was analysed to determine conditions under which it provided a notable improvement. An experiment was constructed using the ``Unfolded SC4 Nematic'' configuration at 3 zoom levels, with 3 mesh qualities, and with 2 periodic repetition settings. Average framerates with the model set to auto rotate over a 1 minute period were compared, with results summarised in \cref{tab:lod_test}. The system used consists of an Intel Core i7-10750H CPU, with an NVIDIA GeForce GTX 1650 Ti GPU.
 
-These results would imply that the optimisation is helpful mostly for very large configurations with high base geometry detail, however provides no advantage (in fact a performance disadvantage) for smaller configurations or at lower base geometry details. This would imply the optimisation should be disabled by default and enabled only when loading a configuration with a very large number of molecules.
+As expected, for high base LODs with large configurations, a significant performance improvement was noted with performance uplifts of up to 5x with minimal visual degradation. For lower molecule counts or base geometry complexities, these performance uplifts diminish significantly. In fact, for small configurations at medium details, slightly higher performance can be observed with the optimisation disabled.
+
+These results would imply that the optimisation is helpful mostly for very large configurations with high base geometry detail, however provides no advantage (in fact a performance disadvantage) for smaller configurations or at lower base geometry details. This makes sense since the optimisation is expected to perform best in situations where a significant reduction in scene triangles can occur, whereas in scenarios with low triangle counts it is likely that the distance calculations required to select a geometry take more compute time than the optimisation saves.
+
+These results would imply the optimisation should be disabled by default and enabled only when loading a configuration with a very large number of molecules.
 \begin{table}
   \begin{center}
   \begin{adjustbox}{width=\textwidth}
@@ -39,4 +44,4 @@ These results would imply that the optimisation is helpful mostly for very large
 \end{table}
 
 \section{Configuration Visualisations}
-TODO
+A variety of visualisations produced using WebMGA can be viewed in \cref{fig:assorted_configs}. These were found to match the visualisations QMGA and WebMGA 2.0 produced with the same configurations. Qualitatively, the images appear clear with correct shading, high quality model geometries and low levels of aliasing along each molecule's edge. Of particular note is that it is difficult to perceive any distance-based level of detail decay in distant molecule geometries, proving this optimisation useful for performance without a notable render quality impact.
