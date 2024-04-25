@@ -1,7 +1,41 @@
 \section{Colour from Director}
 \label{colour_director}
 \subsection{WebMGA 2.0 Implementation}
+A molecule's principal axis' alignment with the director can be visualised by assigning a colour from a palette corresponding to the angle between these vectors. This angle can be determined by,
+\begin{equation}
+\theta=\arccos( \mathbf{e}\cdot \mathbf{n})
+\label{theta_gen}
+\end{equation}
+where $\mathbf{e}$ is the unit vector principal axis direction and $\mathbf{n}$ is the unit vector director.
+
+WebMGA 2.0 currently selects a colour using this angle by rounding this angle to the nearest integer and using it as an index to sample from a list of RGB values. This matches QMGA's implementation.
+
 \subsection{WebMGA 2.0 Bugs}
+While this implementation is completely functional, it has the limitation of not distinguishing between angles within $1 rad$ of each other. It also means an entire new palette file would need to be calculated and stored for any alternate colour range.
+
 \subsection{Improvement Goals}
+An alternative to sampling a discrete palette would be to use an HSL colour space rather than RGB, since a hue is continuously defined by some angle in the range of $[0, 2\pi$. In fact, the RGB values used in the palette file correspond to a hue range of $0$ (red) to $\frac{-4\pi}{3}$ (blue). Since three.js supports defining colours using HSL values\cite{three_colour} this was possible to implement.
+
+While not a strictly necessary improvement since there is likely no visible change for the user, this change was made largely as a task to help become more familiar with the existing code base at the start of development.
+
 \subsection{WebMGA 3.0 Implementation}
+\label{colour_dir_impl}
+The function to sample a colour (as a three.js Color object) from a given $\mathbf{e}$ and $\mathbf{n}$ was rewritten. It now additionally takes in a palette start hue (referred to as $A$) and and a rotation to get to the end hue (referred to as $\mathbf{B}$). $\mathbf{B}$ is defined as a vector percentage of the hue range to cycle through, with $\mathbf{B}=0$ indicating $0\%$ and $\mathbf{B}=1.0$ indicating $100\%$ (i.e. $\mathbf{B}=1$ results in an end hue of $A$, sweeping over hues in the positive direction, while $\mathbf{B}=-1$ results in an end hue of $A$, sweeping over hues in the negative direction). $A$ and $\mathbf{B}$ by default take on a value of $0$ (red) and $\frac{-2}{3}$ (which results in an end hue of $\frac{-4\pi}{3}$, which is blue) respectively to preserve the old colour range.
+
+After a $\theta$ value is derived as in \cref{theta_gen}, an HSL colour is derived using the following process: First,
+\begin{equation}
+\theta=\begin{cases}
+  4\theta &{if } \theta<\frac{\pi}{2}\\
+  4(\pi-\theta)&\text{otherwise.}
+\end{cases}
+\end{equation}
+since $\theta$ can only be in the range $[0, \pi)$, and colouring should be identical for $\theta$ values symmetrically in $\frac{\pi}{2}$ since the director is equivalently defined as its reverse. Multiplication by 4 occurs since $\theta$ for a hue should be in the range $[0, 2\pi)$ rather than $\left[0, \frac{\pi}{2}\right)$. Hue is then derived from the following formula,
+\begin{equation}
+H=\frac{(A+\mathbf{B}\theta) \mod 2\pi}{2\pi}.
+\end{equation}
+$\mod 2\pi$ is applied to ensure an invalid hue does not occur if $B$ is erroneously defined with a value greater than 1.
+
+Saturation (S) and lightness (L) values of 1 and 0.5 respectively are used since this subjectively gives a well presented colour. The HSL tuple is applied to a three.js Color object which is returned.
+
 \subsection{WebMGA 3.0 Bugs}
+The new colours appear indistinguishable from the previous implementation, indicating a successful implementation.

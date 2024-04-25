@@ -8,25 +8,29 @@
     \hline
     LOD Enabled & Mesh Quality & Repeats & Distant Framerate (7) & Nearby Framerate (50) & Nearest Framerate (100)\\
     \hline
-    True & High & $(0,0,0)$ & 48.6 & 26.4 & 22.2 \\
-    False & High & $(0,0,0)$ & 2.4 & 1.2 & 0.6 \\
-    True & Default & $(0,0,0)$ & 36.6 & 27.6 & 21.0 \\
-    False & Default & $(0,0,0)$ & 14.4 & 4.8 & 1.2 \\
-    True & Low & $(0,0,0)$ & 32.4 & 28.2 & 22.8\\
-    False & Low & $(0,0,0)$ & 16.2 & 8.4 & 3.0 \\
+    True & Highest & $(0,0,0)$ & 64.74 &  33.37 & 35.79 \\
+    False & Highest & $(0,0,0)$ & 19.84 & 16.76 & 23.62 \\
+    
+    True & Default & $(0,0,0)$ & 75.7 & 46.83 & 41.83 \\
+    False & Default & $(0,0,0)$ & 74.78 & 35.23 & 36.89 \\
+    
+    True & Lowest & $(0,0,0)$ & 56.38 & 36.78 & 42.66\\
+    False & Lowest & $(0,0,0)$ & 66.34 & 31.75 & 38.28\\
     \hline
-    True & High & $(1,1,1)$ & 9.64 & 8.43 & 10.54 \\
-    False & High & $(1,1,1)$ & 0.86 & 1.87 & 3.97 \\
-    True & Default & $(1,1,1)$ & & & \\
-    False & Default & $(1,1,1)$ & & & \\
-    True & Low & $(1,1,1)$ & & &\\
-    False & Low & $(1,1,1)$ & & & \\
+    True & Highest & $(1,1,1)$ & 5.12 & 8.54 & 8.31 \\
+    False & Highest & $(1,1,1)$ & 0.93 & 2.26 & 4.45 \\
+    
+    True & Default & $(1,1,1)$ & 5.41 & 7.55 & 8.37 \\
+    False & Default & $(1,1,1)$ & 10.74 & 10.60 & 13.90 \\
+    
+    True & Lowest & $(1,1,1)$ & 5.22 & 7.27 & 8.03\\
+    False & Lowest & $(1,1,1)$ & 9.97 & 17.29 & 20.83\\
     \hline
     \hline
     \end{tabular}
   \end{adjustbox}
   \end{center}
-  \caption{TODO TITLE. MENTION THERMAL THROTTLING ISSUES}
+  \caption{Distance based variable level of detail performance analysis results. Performed using the ``Unfolded SC4 Nematic'' configuration shown in \cref{sc4_fig} at 3 zoom levels, with 3 mesh qualities, and with 2 periodic repetition settings (see \cref{peridodic_section}).}
   \label{tab:lod_test}
 \end{table}
 

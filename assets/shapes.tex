@@ -303,7 +303,7 @@ A cut sphere is parameterised in WebMGA using a parent sphere radius and a zCut 
 c=\sqrt{r^2-x^2}
 \end{equation}
 \begin{equation}
-[\alpha,\pi)=[\arcsin\frac{c}{r},\pi)
+[\alpha,\pi)=\left[\arcsin\frac{c}{r},\pi\right)
 \end{equation}
 
 \newshapefigure{cutsphere}{cut sphere}
@@ -319,7 +319,7 @@ A double cut sphere is parameterised in WebMGA using a parent sphere radius and 
 c=\sqrt{r^2-x^2}
 \end{equation}
 \begin{equation}
-[\alpha,\pi-\alpha)=[\arcsin\frac{c}{r},\pi - \arcsin\frac{c}{r})
+[\alpha,\pi-\alpha)=\left[\arcsin\frac{c}{r},\pi - \arcsin\frac{c}{r}\right)
 \end{equation}
 \shapefigure{doublecutsphere}{double cut sphere}
 
@@ -563,4 +563,4 @@ This produced the result shown in \cref{fig:spherocylinder_shape}.
 \shapefigure{spherocylinder}{spherocylinder}
 
 \subsection{WebMGA 3.0 Bugs}
-TODO
+Most shapes were successfully implemented fully and appear as expected. The shading on the spherocylinder in \cref{fig:new_spherocylinder} appears slightly incorrect at the boundary between the curved section and the flatter section, however this is more subtle than WebMGA 2.0's incorrect spherocylinder mesh. A fix for this should be investigated. It likely arises due to some error in calculation of vertex normals.

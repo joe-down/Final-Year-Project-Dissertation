@@ -59,7 +59,7 @@ When the environment is set to light mode (white background) with coloured axes 
     \end{itemize}
   \item Colours should be labelled or meaningful
     \begin{itemize}
-      \item Colour axes according to angle with director (as in TODO REFERENCE)
+      \item Colour axes according to angle with director (as in \cref{colour_director})
     \end{itemize}
   \item Axes should not be obscured
     \begin{itemize}
@@ -73,6 +73,7 @@ When the environment is set to light mode (white background) with coloured axes 
 
 \subsection{WebMGA 3.0 Implementation}
 \subsubsection{Axes Positions}
+\label{axes_positions_sec}
 The existing implementation was found to be needlessly convoluted so was largely stripped out. For example, coloured and uncoloured axes were implemented entirely separately, resulting in a large amount of duplicated code and convoluted logic flow. The bug identified in WebMGA 2.0 regarding uncoloured axes showing with "Multi-Colour" enabled, for example, was found to occur due to incorrect colour object initialisation, meaning what should be "Multi-Colour" axes showed as uncoloured since the colours are not defined when these lines are loaded the very first time.
 
 In the new axes code, they are simply defined in terms of an axes centre point, three axes vectors, and an axis length scale. The axes vectors are handled in the lab frame so are trivially defines as $x=(1,0,0)$, $y=(0,1,0)$, and $z=(0,0,1)$.
@@ -89,12 +90,14 @@ Using the lab frame centre point and the axes vectors and scales, axis lines are
 \end{equation}
 where $l_0$ and $l_1$ are the axis line start and end, $c$ is the axes centre, $v$ is the axis vector, $s$ is the axis scale factor, and $z$ is the zoom factor of the camera. These can be recalculated and applied on every camera change. A Three.js Line object is constructed for each axis using the line start, end, and a colour.
 
+During development of this feature, it was found that the axes would jump around the screen on camera movements rather than remain in the corner. Initially I believed this was an error in my implementation of the line origin calculation based on the camera position. The real cause of the problem was that the WebMGA camera update hook was incorrectly implemented and only called on certain types of camera movements. The position update function was changed to be called as part of the scene's ``onBeforeRender'' callback, provided as part of three.js, to ensure the axes are updated at every frame render immediately before drawing the scene (and always after any user input is processed). This mitigated the jumping issue.
+
 \subsubsection{Director}
 \label{director_axis_plot}
-Plotting the director is made simple using the above setup. A new axis is simply defined using \cref{axes_vector_1,axes_vector_2}, with $v$ set to the already computed director vector (TODO show where this was done).
+Plotting the director is made simple using the above setup. A new axis is simply defined using \cref{axes_vector_1,axes_vector_2}, with $v$ set to the already computed director vector.
 
 \subsubsection{Axes Colouring}
-It was decided that a meaningful colouring for the axes lines (including the director) would be using the same colour scheme as for molecule colour (TODO show where). This can be done easily since all axes have a defined direction vector which can be passed to the TODO COLOURFROMDIRECTORNAME function (TODO show where). The resulting colour is simply passed as part of the Line object constructor.
+It was decided that a meaningful colouring for the axes lines (including the director) would be using the same colour scheme as for molecule colour (\cref{colour_director}). This can be done easily since all axes have a defined direction vector which can be passed to the ``colour\_from\_director'' function (\cref{colour_dir_impl}). The resulting colour is simply passed as part of the Line object constructor.
 
 \subsubsection{Axes Summary}
 \begin{figure}
@@ -116,8 +119,5 @@ It was decided that a meaningful colouring for the axes lines (including the dir
 
 Some result can be viewed in \cref{fig:new_axes}.
 
-\subsubsection{GUI Implementation}
-TODO discuss UI
-
 \subsection{WebMGA 3.0 Bugs}
-TODO
+The axes are currently lacking labels which would be useful for identifying their intended. Ideally, the end of each axis line should have a letter indicating $x$, $y$, $z$, or $\mathbf{n}$ (for the director).
