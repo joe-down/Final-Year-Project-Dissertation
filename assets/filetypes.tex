@@ -9,18 +9,18 @@ The CNF format is widely used for representation of molecular configurations. LA
 
 \cref{tab:lammps_format} shows the structure of a file of this format. Rows represent lines in the file. Each value is represented by a signed float of format $-1.000000 $, where digits before the decimal are omitted if not present. Values are separated by spaces, padded to align decimal points.
 
-For WebMGA 3.0, a parser script was written in JavaScript which builds a WebMGA JSON configuration from the ``.cnf'' file provided. Specifically, a unit box is constructed from $(lx, ly, lz)$, and molecule positions and orientations are obtained from corresponding pairs of $((rx,ry,rz),(ex,ey,ez))$ for some molecule id. All other parameters are dropped since they aren't used by WebMGA. Molecules are ordered in an array according to their id.
+For WebMGA 3.0, a parser script was written in JavaScript which builds a WebMGA JSON configuration from the ``.cnf'' file provided. Specifically, a unit box is constructed from $(l_x, l_y, l_z)$, and molecule positions and orientations are obtained from corresponding pairs of $((r_x,r_y,r_z),(e_x,e_y,e_z))$ for some molecule id. All other parameters are dropped since they aren't used by WebMGA. Molecules are ordered in an array according to their id.
 \begin{table}
   \begin{center}
   \begin{adjustbox}{width=\textwidth}
     \begin{tabular}{lllllllllllll}
       \hline\hline
       Molecule count & & & & & & & & & & & &\\
-      Unit box X length ($lx$) & & & & & & & & & & & &\\
-      Unit box Y length ($ly$) & & & & & & & & & & & &\\
-      Unit box Z length ($lz$) & & & & & & & & & & & &\\
+      Unit box X length ($l_x$) & & & & & & & & & & & &\\
+      Unit box Y length ($l_y$) & & & & & & & & & & & &\\
+      Unit box Z length ($l_z$) & & & & & & & & & & & &\\
       Not used & Not used & & & & & & & & & & &\\
-      Position ($rx$) & Position ($ry$) & Position ($rz$) & Velocity ($vx$) & Velocity ($vy$) & Velocity ($vz$) & Orientation ($ex$) & Orientation ($ey$) & Orientation ($ez$) & Orientational velocity ($ux$) & Orientational velocity ($uy$) & Orientational velocity ($uz$) & Molecule ID\\
+      Position ($r_x$) & Position ($r_y$) & Position ($r_z$) & Velocity ($v_x$) & Velocity ($v_y$) & Velocity ($v_z$) & Orientation ($e_x$) & Orientation ($e_y$) & Orientation ($e_z$) & Orientational velocity ($u_x$) & Orientational velocity ($u_y$) & Orientational velocity ($u_z$) & Molecule ID\\
       \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
        \hline\hline
     \end{tabular}
@@ -33,14 +33,14 @@ For WebMGA 3.0, a parser script was written in JavaScript which builds a WebMGA 
 \subsubsection{Cinacchi Format (.qmga)}
 See \cref{tab:cinacchi_format} for the structure of a file of this format. Rows represent lines in the file. Each value is represented by a signed float of format $-1.00000000$, where digits before the decimal are omitted if not present. Values are separated by spaces, padded to align decimal points.
 
-For WebMGA 3.0, a parser script was written in JavaScript which builds a WebMGA JSON configuration from the ``.qmga'' file provided. Specifically, a unit box is constructed from $(lx, ly, lz)$, and molecule positions and orientations are obtained from corresponding pairs of $((rx,ry,rz),(ex,ey,ez))$. The shape parameter is dropped since molecule shape is not defined by the file. Molecules are ordered in an array as they are encountered.
+For WebMGA 3.0, a parser script was written in JavaScript which builds a WebMGA JSON configuration from the ``.qmga'' file provided. Specifically, a unit box is constructed from $(l_x, l_y, l_z)$, and molecule positions and orientations are obtained from corresponding pairs of $((r_x,r_y,r_z),(e_x,e_y,e_z))$. The shape parameter is dropped since molecule shape is not defined by the file. Molecules are ordered in an array as they are encountered.
 \begin{table}
   \begin{center}
   \begin{adjustbox}{width=\textwidth}
     \begin{tabular}{lllllll}
       \hline\hline
-       Unit box X half length ($lx/2$) & Unit box Y half length ($ly/2$) & Unit box Z half length ($lz/2$) & & & &\\
-       Shape parameter & Position X ($rx$) & Position Y ($ry$) & Position Z ($rz$) & Orientation X ($ex$) & Orientation Y ($ey$) & Orientation Z ($ez$)\\
+       Unit box X half length ($l_x/2$) & Unit box Y half length ($l_y/2$) & Unit box Z half length ($l_z/2$) & & & &\\
+       Shape parameter & Position X ($r_x$) & Position Y ($r_y$) & Position Z ($r_z$) & Orientation X ($e_x$) & Orientation Y ($e_y$) & Orientation Z ($e_z$)\\
        \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
        \hline\hline
     \end{tabular}

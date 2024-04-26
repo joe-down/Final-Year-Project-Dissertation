@@ -24,7 +24,7 @@ The function to sample a colour (as a three.js Color object) from a given $\math
 After a $\theta$ value is derived as in \cref{theta_gen}, an HSL colour is derived using the following process: First,
 \begin{equation}
 \theta=\begin{cases}
-  4\theta &{if } \theta<\frac{\pi}{2}\\
+  4\theta &\text{if } \theta<\frac{\pi}{2}\\
   4(\pi-\theta)&\text{otherwise.}
 \end{cases}
 \end{equation}
@@ -32,7 +32,7 @@ since $\theta$ can only be in the range $[0, \pi)$, and colouring should be iden
 \begin{equation}
 H=\frac{(A+\mathbf{B}\theta) \mod 2\pi}{2\pi}.
 \end{equation}
-$\mod 2\pi$ is applied to ensure an invalid hue does not occur if $\mathbf{B}$ is erroneously defined with a value greater than 1.
+The $\mod 2\pi$ is applied to ensure an invalid hue does not occur if $\mathbf{B}$ is erroneously defined with a value greater than 1.
 
 Saturation (S) and lightness (L) values of 1 and 0.5 respectively are used since this subjectively gives a well presented colour. The HSL tuple is applied to a three.js Color object which is returned.
 

@@ -3,9 +3,9 @@
 \subsubsection{Distance Based Levels of Detail}
 \label{optim_lod}
 WebMGA 3.0 now utilises distance based variable LOD. This is implemented using three.js' built in LOD class \cite{lod_three} which acts as if it were a regular three geometry, except three.js automatically switches meshes at set camera distances. Meshes are generated at each LOD level up to the Level of Detail setting selected by the user and added to the LOD object with some distance as shown by this code,
-\begin{lstlisting}
+\begin{verbatim}
   lod_object.addLevel(mesh, distance)
-\end{lstlisting}.
+\end{verbatim}.
 
 Lower detail meshes are used at further distances, with the distances selected by manual tuning such that the geometry change is difficult to observe. Examples of this works are shown in \cref{fig:lod_distances,fig:lod_spin}.
 \begin{figure}
